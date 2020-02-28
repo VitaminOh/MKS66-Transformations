@@ -66,10 +66,16 @@ def parse_file( fname, points, transform, screen, color ):
                 matrix_mult(transform, points)
                 round_matrix(points)
             if command.strip("\n") == "display":
+                clear_screen(screen)
                 draw_lines(points, screen, color)
                 display(screen)
             if command.strip("\n") == "save":
-                pass
+                command = script.readline()
+                values = command.split()
+                clear_screen(screen)
+                draw_lines(points, screen, color)
+                save_ppm(screen, "img.ppm")
+                save_extension(screen, values[0])
             if command.strip("\n") == "quit":
-                pass
+                break
             command = script.readline()
